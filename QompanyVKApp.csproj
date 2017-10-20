@@ -6,6 +6,12 @@
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\models\Employee.ts" />
+    <None Remove="ClientApp\models\meeting.ts" />
+    <None Remove="ClientApp\models\MeetingRoom.ts" />
+  </ItemGroup>
   
   
 
@@ -20,6 +26,12 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\models\Employee.ts" />
+    <TypeScriptCompile Include="ClientApp\models\Meeting.ts" />
+    <TypeScriptCompile Include="ClientApp\models\MeetingRoom.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

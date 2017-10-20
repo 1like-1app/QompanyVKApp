@@ -1,0 +1,28 @@
+<template>
+    <div>
+        <h1>Weather forecast</h1>
+
+        <p>This component demonstrates fetching data from the server.</p>
+
+        <table v-if="meetings.length" class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>StartTime</th>
+                    <th>EndTime</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in meetings">
+                    <td>{{ item.Id }}</td>
+                    <td>{{ item.StartTime }}</td>
+                    <td>{{ item.EndTime }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p v-else><em>Loading...</em></p>
+    </div>
+</template>
+
+<script src="./fetchmeetings.ts"></script>

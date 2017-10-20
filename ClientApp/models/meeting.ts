@@ -2,9 +2,9 @@
 import {Employee} from "./Employee";
 
 export interface Meeting {
-    Id: number;
-    MeetingRoom: MeetingRoom;
-    StartTime: Date;
-    EndTime: Date;
-    EmployeeMeetings: Employee[];
+    id: number;
+    meetingRoom: MeetingRoom;
+    startTime: Date;
+    endTime: Date;
+    employeeMeetings: Employee[];
 }

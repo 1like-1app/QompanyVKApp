@@ -23,31 +23,30 @@
     /* On small screens, convert the nav menu to a vertical sidebar */
     .main-nav {
         height: 100%;
-        width: calc(25% - 20px);
+        width: 100%;
     }
     .main-nav .navbar {
         border-radius: 0px;
         border-width: 0px;
-        height: 100%;
+        width: 100%;
     }
     .main-nav .navbar-header {
-        float: none;
+        padding-right: 10px;
+        border-right: 2px solid #444;
     }
     .main-nav .navbar-collapse {
-        border-top: 1px solid #444;
+        margin-left: 40%;   
         padding: 0px;
     }
-    .main-nav .navbar ul {
-        float: none;
-    }
     .main-nav .navbar li {
-        float: none;
+        float: left;
         font-size: 15px;
         margin: 6px;
     }
     .main-nav .navbar li a {
         padding: 10px 16px;
         border-radius: 4px;
+        margin-left: 10%;
     }
     .main-nav .navbar a {
         /* If a menu item's text is too long, truncate it */

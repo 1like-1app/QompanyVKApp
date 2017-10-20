@@ -20,15 +20,13 @@ namespace QompanyVKApp.Controllers
             _context = context;
         }
 
-        // GET: api/Meetings
         [HttpGet("[action]")]
         public IEnumerable<Meeting> GetMeetings()
         {
             return _context.Meetings;
         }
 
-        // GET: api/Meetings/5
-        [HttpGet("{id}")]
+        [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetMeeting([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -46,7 +44,7 @@ namespace QompanyVKApp.Controllers
             return Ok(meeting);
         }
 
-        // PUT: api/Meetings/5
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMeeting([FromRoute] int id, [FromBody] Meeting meeting)
         {

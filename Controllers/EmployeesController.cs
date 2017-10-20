@@ -35,8 +35,7 @@ namespace QompanyVKApp.Controllers
             .Select(employee => employee);
         }
 
-        // GET: api/Employees/5
-        [HttpGet("{id}")]
+        [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetEmployee([FromRoute] int id)
         {
             if (!ModelState.IsValid)

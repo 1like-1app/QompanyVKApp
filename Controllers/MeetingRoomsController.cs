@@ -30,7 +30,7 @@ namespace QompanyVKApp.Controllers
         }
 
         // GET: api/MeetingRooms/5
-        [HttpGet("{id}")]
+        [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetMeetingRoom([FromRoute] int id)
         {
             if (!ModelState.IsValid)

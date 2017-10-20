@@ -6,7 +6,7 @@
 .main-nav li a.router-link-active,
 .main-nav li a.router-link-active:hover,
 .main-nav li a.router-link-active:focus {
-    background-color: #4189C7;
+    background-color: rgb(65, 65, 65);
     color: white;
 }
 
@@ -35,7 +35,7 @@
         border-right: 2px solid #444;
     }
     .main-nav .navbar-collapse {
-        margin-left: 40%;   
+        margin-left: 20%;   
         padding: 0px;
     }
     .main-nav .navbar li {
@@ -45,7 +45,7 @@
     }
     .main-nav .navbar li a {
         padding: 10px 16px;
-        border-radius: 4px;
+        border-radius: 2px;
         margin-left: 10%;
     }
     .main-nav .navbar a {

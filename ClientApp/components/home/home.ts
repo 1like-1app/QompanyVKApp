@@ -5,7 +5,7 @@ import { Component } from 'vue-property-decorator';
 
 @Component
 export default class BookingForm extends Vue {
-    date: Date = new Date()
+    date: string = new Date().toISOString().split('T')[0];
     meeting: Meeting = new Meeting()
     onSubmit(submitEvent: any) {
         this.meeting.startTime = new Date(this.date.toString() + 'T' + this.meeting.startTime.toString());

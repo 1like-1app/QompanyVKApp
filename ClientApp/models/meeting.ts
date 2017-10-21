@@ -1,8 +1,9 @@
 ﻿import {MeetingRoom} from "./MeetingRoom";
 import {Employee} from "./Employee";
 
-export interface Meeting {
+export class Meeting {
     id: number;
+    theme: string;
     meetingRoom: MeetingRoom;
     startTime: Date;
     endTime: Date;

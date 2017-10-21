@@ -18,16 +18,11 @@
     font-weight: bold;
 }
 
-@media (max-width: 768px) {
-    .main-home  .button-place .btn{
-        width: 100%;
-        margin: 10px auto;
-    }
-}
-
 .list-of-members{
+    float: left;
     overflow: auto;
-    height: 100px;
+    height: 120px;
+    width: 320px;
 }
 
 .list-of-new-members{
@@ -90,14 +85,41 @@
     margin-right: 10px;
 }
 
-.modal-members {
-    width: 400px;
-    margin: auto;
-    margin-top: 20%;
-}
-
 .checkbox-right {
     padding-top: 5px;
     float: right;
     margin-right: 10%;
+}
+
+.modal-members {
+    width: 60%;
+    margin: auto;
+    margin-top: 20%;
+}
+
+@media (max-width: 768px) {
+    .main-home  .button-place .btn{
+        width: 100%;
+        margin: 10px auto;
+    }
+
+    .modal-members {
+        width: 95%;
+    }
+
+    .list-of-members{
+        float: left;
+        overflow: auto;
+        height: 115px;
+        width: 300px;
+    }
+
+    .booking-submit {
+        height: 45px;
+        margin-top: -25px;
+    }
+
+    #myModal .modal-footer {
+        margin-top: -20px;
+    }
 }

@@ -6,6 +6,7 @@ namespace QompanyVKApp.Models
     public class Meeting
     {
         public int Id { get; set; }
+        public string Theme { get; set; }
         public MeetingRoom MeetingRoom { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }

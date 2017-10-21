@@ -2,6 +2,10 @@ import './css/site.css';
 import 'bootstrap';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import 'vue-event-calendar/dist/style.css'
+import vueEventCalendar from 'vue-event-calendar'
+Vue.use(vueEventCalendar, {weekStartOn: 1, locale: 'ru'})
+Vue.config.devtools = true //enable Vue dev tools in browser //TODO: Change at prod
 Vue.use(VueRouter);
 
 const routes = [

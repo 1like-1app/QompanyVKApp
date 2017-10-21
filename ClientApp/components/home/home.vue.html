@@ -7,7 +7,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button class="close" type="button" data-dismiss="modal">×</button>
+                        <button class="close right-close" type="button" data-dismiss="modal">×</button>
                         <h4 class="modal-title">Бронирование переговорной</h4>
                     </div>
                     <div class="modal-body">
@@ -40,14 +40,47 @@
                                 <div class="form-group col-md-2 col-sm-2 col-xs-12">
                                     <label for="ivent-members">Участники:</label>
                                 </div>
-                                <div class="form-group col-md-6 col-sm-6 col-xs-4">
-                                    <select class="form-control" name="ivent-members" value="Участники">
-                                        <option></option>
-                                    </select>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-8">
+                                    <ul class="list-of-members">
+                                        <li>
+                                            <div class="member-elem">
+                                                <button class="close btn-cls" type="button">×</button>
+                                                <img src="./photo.jpg" alt="Фото" height="50" width="50">
+                                                <span class="name">
+                                                    <b>Имя</b>
+                                                </span>
+                                                <span class="secName">
+                                                    <b>Фамилия</b>
+                                                </span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="member-elem">
+                                                <button class="close btn-cls" type="button">×</button>
+                                                <img src="./photo.jpg" alt="Фото" height="50" width="50">
+                                                <span class="name">
+                                                    <b>Имя</b>
+                                                </span>
+                                                <span class="secName">
+                                                    <b>Фамилия</b>
+                                                </span>
+                                            </div>
+                                            <div class="member-elem">
+                                                <button class="close btn-cls" type="button">×</button>
+                                                <img src="./photo.jpg" alt="Фото" height="50" width="50">
+                                                <span class="name">
+                                                    <b>Имя</b>
+                                                </span>
+                                                <span class="secName">
+                                                    <b>Фамилия</b>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <!-- Place for ts script -->
                                 <div class="form-group col-md-4 col-sm-4 col-xs-2">
-                                    <button class="btn btn-info button-new-member" type="button">Добавить</button>
+                                    <button class="btn btn-info button-new-member" type="button" data-toggle="modal" data-target="#modalMembers">Добавить</button>
                                 </div>
                             </div>
                             <div class="row">
@@ -55,7 +88,7 @@
                                     <label for="ivent-room">Ваша переговорная:</label>
                                 </div>
                                 <div class="form group room-ivent col-md-4 col-sm-4 col-xs-4">
-                                    <input type="text" value="1488" class="form-control form-room-for-ivent" id="ivent-room" name="ivent-room">
+                                    <input type="text" value="773/a" class="form-control form-room-for-ivent" id="ivent-room" name="ivent-room">
                                 </div>
                                 <!-- After this new modal will open -->
                                 <div class="form-group col-md-4 col-sm-4 col-xs-8">
@@ -76,17 +109,66 @@
                 </div>
             </div>
         </div>
-        <!-- New modal, now clear -->
         <div id="modalRoom" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button class="close" type="button" data-dismiss="modal">×</button>
+                        <button class="close right-close" type="button" data-dismiss="modal">×</button>
                         <h4 class="modal-title">Выбор комнаты</h4>
                     </div>
                     <div class="modal-body">Кажется, вам не понравилась предложенная переговорная!</div>
                     <div class="modal-footer">
                         <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modalMembers" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content modal-members">
+                    <div class="modal-header">
+                        <button class="close right-close" type="button" data-dismiss="modal">×</button>
+                        <h4 class="modal-title">Добавить участников</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" method="post" name="adding-new-members">
+                            <ul class="list-of-new-members">
+                                <li>
+                                    <div class="new-member-elem">
+                                        <img src="./photo.jpg" alt="Фото" height="50" width="50">
+                                        <label for="box1">
+                                            <span class="name">
+                                                <b>Имя</b>
+                                            </span>
+                                            <span class="secName">
+                                                <b>Фамилия</b>
+                                            </span>
+                                        </label>
+                                        <div class="checkbox-right">
+                                            <input class="add-checkbox" type="checkbox" id="box1" value="">
+                                        </div>
+                                    </div>
+                                    <div class="new-member-elem">
+                                        <img src="./photo.jpg" alt="Фото" height="50" width="50">
+                                        <label for="box2">
+                                            <span class="name">
+                                                <b>Имя</b>
+                                            </span>
+                                            <span class="secName">
+                                                <b>Фамилия</b>
+                                            </span>
+                                        </label>
+                                        <div class="checkbox-right">
+                                            <input class="add-checkbox" type="checkbox" id="box2" value="">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="form-group">
+                                <label for="adding-end"></label>
+                                <input type="submit" name="adding-end" class="form-control btn btn-success adding-submit" data-dismiss="modal" value="ОК">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

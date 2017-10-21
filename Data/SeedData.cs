@@ -14,13 +14,13 @@ namespace QompanyVKApp.Data
             using (var context = new QompanyDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<QompanyDbContext>>()))
             {
-                // Look for any movies.
+                // Look for any employees.
                 if (context.Employees.Any())
                 {
                     return;   // DB has been seeded
                 }
-                var room = new MeetingRoom() { Name = "tfs", Floor = 2, Capacity = 5 };
-                //context.MeetingRooms.Add(room);
+                var room = new MeetingRoom() { Name = "Place where people talk about tfs", Floor = 2, Capacity = 5 };
+                
                 var meetings = new List<Meeting>()
                     {
                         new Meeting
@@ -58,7 +58,7 @@ namespace QompanyVKApp.Data
                         Employee = employees[1]
                     }
                 };
-
+                room.Meetings = new List<Meeting> { meetings[0] };
                 context.Meetings.AddRange(meetings);
                 context.SaveChanges();
             }

@@ -15,7 +15,6 @@ export class Meeting {
         this.startTime = new Date();
         this.startTime.setHours(this.startTime.getHours() + 2);
         this.endTime = this.startTime;
-        this.endTime.setMinutes(this.endTime.getMinutes() + 30);   
-        this.theme = "Two way?";     
+        this.endTime.setMinutes(this.endTime.getMinutes() + 30);
     }
 }

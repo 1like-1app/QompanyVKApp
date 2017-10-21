@@ -15,12 +15,24 @@ export default class BookingForm extends Vue {
 
     @Watch('date', { immediate: true, deep: true })
     dateOnPropertyChanged(value: string, oldValue: string) {
-       console.log(value + oldValue);
+        console.log(value + oldValue);
     }
 
     @Watch('meeting', { immediate: true, deep: true })
     meetingOnPropertyChanged(value: Meeting, oldValue: Meeting) {
         console.log(JSON.stringify(value));
+        if (typeof value.startTime === "string" && typeof value.endTime === "string") {
+            let startTime = new Date(this.date.toString() + 'T' + value.startTime);
+            let endTime = new Date(this.date.toString() + 'T' + value.endTime);
+            let query = 'api/MeetingRooms/GetSatisfyingRooms/' + startTime.toISOString() + "/" + endTime.toISOString();
+            console.log(query);
+            alert(query);
+            fetch(query)
+                .then(response => response.json() as Promise<MeetingRoom[]>)
+                .then(data => {
+                    this.rooms = data;
+                });
+        }
     }
 
     checkboxToggle(id: number) {
@@ -40,7 +52,7 @@ export default class BookingForm extends Vue {
             this.checkedEmployees = this.checkedEmployees.filter(e => e != id);
         }
     }
-    
+
     onSubmit(submitEvent: any) {
         this.meeting.startTime = new Date(this.date.toString() + 'T' + this.meeting.startTime.toString());
         this.meeting.endTime = new Date(this.date.toString() + 'T' + this.meeting.endTime.toString());

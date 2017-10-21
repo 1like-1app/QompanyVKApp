@@ -18,6 +18,16 @@
     font-weight: bold;
 }
 
+.list-of-members{
+    overflow: auto;
+    height: 100px;
+}
+
+.list-of-new-members{
+    overflow: auto;
+    height: 130px;
+}
+
 .list-of-members li{
     list-style: none;
 }

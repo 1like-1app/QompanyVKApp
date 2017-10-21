@@ -25,6 +25,7 @@
     "webpack-hot-middleware": "^2.12.2"
   },
   "dependencies": {
-    "vue-event-calendar": "^1.4.13"
+    "vue-event-calendar": "^1.4.13",
+    "vue-form-wizard": "^0.7.0"
   }
 }

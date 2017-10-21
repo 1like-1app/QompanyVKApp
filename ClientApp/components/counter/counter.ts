@@ -1,11 +1,16 @@
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import VueFormWizard from 'vue-form-wizard';
+import 'vue-form-wizard/dist/vue-form-wizard.min.css';
+import {FormWizard, TabContent} from 'vue-form-wizard';
+import 'vue-form-wizard/dist/vue-form-wizard.min.css';
 
-@Component
-export default class CounterComponent extends Vue {
-    currentcount: number = 0;
 
-    incrementCounter() {
-        this.currentcount++;
-    }
-}
+Vue.use(VueFormWizard)
+new Vue({
+ el: '#Template',
+ methods: {
+  onComplete: function(){
+      alert('Yay. Done!');
+   }
+  }
+})

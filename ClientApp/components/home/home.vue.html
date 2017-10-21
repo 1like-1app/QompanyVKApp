@@ -18,8 +18,9 @@
                                     <input type="text" class="form-control ivent-name-field" id="ivent-name" name="ivent-name" placeholder="Название мероприятия">
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-6">
-                                    <label for="ivent-date">Дата:</label>
-                                    <input type="date" class="form-control ivent-date-field" id="ivent-date" name="ivent-date">
+                                    <label for="ivent-date">Дата:</label>                                    
+                                    <input type="text" class="form-control date-field" id="date" name="datapicker" placeholder="Дата">
+                                    <datepicker format="DD/MM/YYYY" lang="ru" :disable-passed-days="true" id="datepicker"></datepicker>
                                 </div>
                             </div>
                             <div class="row">
@@ -94,4 +95,5 @@
     </div>
 </template>
 
+<script src="./home.ts">
 <style src="./home.css" />

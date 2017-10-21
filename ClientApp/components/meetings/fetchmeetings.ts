@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {Meeting} from '../../models/meeting'
+import {Meeting} from '../../models/Meeting'
 import { Component } from 'vue-property-decorator';
 
 @Component

@@ -1,6 +1,6 @@
-﻿export interface MeetingRoom {
-    Id: number;
-    Name: string;
-    Floor: number;
-    Capacity: number;
+﻿export class MeetingRoom {
+    id: number;
+    name: string;
+    floor: number;
+    capacity: number;
 }

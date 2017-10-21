@@ -9,5 +9,5 @@ export class Meeting {
     meetingRoom: MeetingRoom;
     startTime: Date;
     endTime: Date;
-    employeeMeetings: Employee[];
+    employeeMeetings: Employee[] = [];
 }

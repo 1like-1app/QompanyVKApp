@@ -10,6 +10,17 @@ export default class BookingForm extends Vue {
     meeting: Meeting = new Meeting();
     meetings: Meeting[] = [];
     employees: Employee[] = [];
+    checkboxToggle(id: number) {
+        let b = this.meeting.employeeMeetings.filter(e => e.id == id);
+        if (b.length) {
+            this.meeting.employeeMeetings = this.meeting.employeeMeetings.filter(e => e.id != b[0].id);
+        }
+        else {
+            this.meeting.employeeMeetings.push(this.employees.filter(e => e.id == id)[0]);
+        }
+        alert(JSON.stringify(this.meeting.employeeMeetings));
+    }
+
 
     onSubmit(submitEvent: any) {
         this.meeting.startTime = new Date(this.date.toString() + 'T' + this.meeting.startTime.toString());

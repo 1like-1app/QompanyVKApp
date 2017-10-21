@@ -1,26 +1,25 @@
 <template>
     <div class="main-home">
-        
         <div class="button-place">
             <button class="btn btn-info btn-lg button-book" type="button" data-toggle="modal" data-target="#myModal">Забронировать</button>
         </div>
-        <div id="myModal" class="modal fade ">
+        <div id="myModal" class="modal fade" z-index>
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button class="close" type="button" data-dismiss="modal">×</button>
+                        <button class="close right-close" type="button" data-dismiss="modal">×</button>
                         <h4 class="modal-title">Бронирование переговорной</h4>
                     </div>
                     <div class="modal-body">
-                        <form role="form" method="post" name="booking" v-on:submit.prevent="onSubmit">
+                        <form role="form" method="post" name="booking">
                             <div class="row">
                                 <div class="form-group col-md-8 col-sm-8 col-xs-6">
                                     <label for="ivent-name">Мероприятие:</label>
-                                    <input type="text" v-model="meeting.theme" class="form-control ivent-name-field" id="ivent-name" name="ivent-name" placeholder="Название мероприятия">
+                                    <input type="text" class="form-control ivent-name-field" id="ivent-name" name="ivent-name" placeholder="Название мероприятия">
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-6">
                                     <label for="ivent-date">Дата:</label>
-                                    <input type="date" v-model="date" class="form-control ivent-date-field" id="ivent-date" name="ivent-date">
+                                    <input type="date" class="form-control ivent-date-field" id="ivent-date" name="ivent-date">
                                 </div>
                             </div>
                             <div class="row">
@@ -28,27 +27,38 @@
                                     <label for="ivent-time1">
                                         <b>С:</b>
                                     </label>
-                                    <input type="time" v-model="meeting.startTime" class="form-control ivent-time1-field" id="ivent-time1" name="ivent-time1">
+                                    <input type="time" class="form-control ivent-time1-field" id="ivent-time1" name="ivent-time1">
                                 </div>
                                 <div class="form-group col-md-3 col-sm-3 col-xs-5">
                                     <label for="ivent-time2">
                                         <b>ДО:</b>
                                     </label>
-                                    <input type="time" v-model="meeting.endTime" class="form-control ivent-time2-field" id="ivent-time2" name="ivent-time2">
+                                    <input type="time" class="form-control ivent-time2-field" id="ivent-time2" name="ivent-time2">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-2 col-sm-2 col-xs-12">
                                     <label for="ivent-members">Участники:</label>
                                 </div>
-                                <div class="form-group col-md-6 col-sm-6 col-xs-4">
-                                    <select class="form-control" name="ivent-members" value="Участники">
-                                        <option></option>
-                                    </select>
+
+                                <div class="form-group col-md-6 col-sm-6 col-xs-8">
+                                    <ul v-if="employees.length" class="list-of-members">
+                                        <li v-for="employee in meeting.employeeMeetings">
+                                            <div class="member-elem">
+                                                <button class="close btn-cls" type="button">×</button>
+                                                <img src="./photo.jpg" alt="Фото" height="50" width="50">
+                                                <span class="name">
+                                                    <b>{{employee.firstName}}</b>
+                                                </span>
+                                                <span class="secName">
+                                                    <b>{{employee.lastName}}</b>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <!-- Place for ts script -->
                                 <div class="form-group col-md-4 col-sm-4 col-xs-2">
-                                    <button class="btn btn-info button-new-member" type="button">Добавить</button>
+                                    <button class="btn btn-info button-new-member" type="button" data-toggle="modal" data-target="#modalMembers">Добавить</button>
                                 </div>
                             </div>
                             <div class="row">
@@ -56,7 +66,7 @@
                                     <label for="ivent-room">Ваша переговорная:</label>
                                 </div>
                                 <div class="form group room-ivent col-md-4 col-sm-4 col-xs-4">
-                                    <input type="text" value="1488" class="form-control form-room-for-ivent" id="ivent-room" name="ivent-room">
+                                    <input type="text" value="773/a" class="form-control form-room-for-ivent" id="ivent-room" name="ivent-room">
                                 </div>
                                 <!-- After this new modal will open -->
                                 <div class="form-group col-md-4 col-sm-4 col-xs-8">
@@ -77,12 +87,11 @@
                 </div>
             </div>
         </div>
-        <!-- New modal, now clear -->
         <div id="modalRoom" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button class="close" type="button" data-dismiss="modal">×</button>
+                        <button class="close right-close" type="button" data-dismiss="modal">×</button>
                         <h4 class="modal-title">Выбор комнаты</h4>
                     </div>
                     <div class="modal-body">Кажется, вам не понравилась предложенная переговорная!</div>
@@ -92,16 +101,54 @@
                 </div>
             </div>
         </div>
-        <vue-event-calendar :events="meetings">
-            <template scope="props">
-                <div v-for="(event, index) in props.showEvents" class="event-item">
-                    <h3 class="title">{{index+1}}. {{event.title}}</h3>
-                    <p class="time">{{new Date(event.startTime).toISOString().split('T')[0]}}</p>
-                    <p class="desc">{{event.date}}</p>
+        <div id="modalMembers" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content modal-members">
+                    <div class="modal-header">
+                        <button class="close right-close" type="button" data-dismiss="modal">×</button>
+                        <h4 class="modal-title">Добавить участников</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" method="post" name="adding-new-members">
+                            <ul class="list-of-new-members">
+                                <li v-for="employee in employees">
+                                    <div class="new-member-elem">
+                                        <img src="./photo.jpg" alt="Фото" height="50" width="50">
+                                        <label for="box1">
+                                            <span class="name">
+                                                <b>{{employee.firstName}}</b>
+                                            </span>
+                                            <span class="secName">
+                                                <b>{{employee.lastName}}</b>
+                                            </span>
+                                        </label>
+                                        <div class="checkbox-right">
+                                            <input class="add-checkbox" type="checkbox" id="box1" :value="employee.id" v-on:click="checkboxToggle(employee.id)">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="form-group">
+                                <label for="adding-end"></label>
+                                <input type="submit" name="adding-end" class="form-control btn btn-success adding-submit" data-dismiss="modal" value="ОК">
+                            </div>
+                        </form>
+                        </div>
+                    </div>
                 </div>
-            </template>
-        </vue-event-calendar>
-    </div>
+            </div>
+            <vue-event-calendar :events="meetings">
+                <template scope="props">
+                    <div v-for="(event, index) in props.showEvents" class="event-item">
+                        <h3 class="title">{{index+1}}. {{event.title}}</h3>
+                        <p class="time">{{new Date(event.startTime).toISOString().split('T')[0]}}</p>
+                        <p class="desc">{{event.date}}</p>
+                    </div>
+                </template>
+            </vue-event-calendar>
+        </div>
 </template>
-<script src="./home.ts"></script>
+
+<!-- <script src="./home.ts"> -->
 <style src="./home.css" />
+<script src="./home.ts"></script>

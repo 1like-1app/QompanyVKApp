@@ -23,4 +23,79 @@
         width: 100%;
         margin: 10px auto;
     }
+.list-of-members{
+    overflow: auto;
+    height: 100px;
+}
+
+.list-of-new-members{
+    overflow: auto;
+    height: 130px;
+}
+
+.list-of-members li{
+    list-style: none;
+}
+
+.member-elem{
+    padding-top:5px;
+    padding-bottom:5px;
+    border-bottom: 1px solid #c8d5da;
+}
+
+.member-elem .name {
+    padding-left: 10px;
+    text-align: left;
+}
+
+.member-elem img{
+    border-radius: 25px;
+}
+
+.list-of-new-members img{
+    border-radius: 25px;
+}
+
+.list-of-new-members li{
+    list-style: none;
+}
+
+.new-member-elem {
+    padding-top:5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #c8d5da;
+}
+
+.new-member-elem .name{
+    padding-left:10px;
+    text-align: left;
+}
+
+.add-checkbox {
+    height: 25px;
+    width: 25px;
+}
+
+.right-close {
+    float: right;
+}
+
+.btn-cls {
+    color:red;
+    float: right;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.modal-members {
+    width: 400px;
+    margin: auto;
+    margin-top: 20%;
+}
+
+.checkbox-right {
+    padding-top: 5px;
+    float: right;
+    margin-right: 10%;
 }

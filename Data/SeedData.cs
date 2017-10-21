@@ -25,6 +25,7 @@ namespace QompanyVKApp.Data
                     {
                         new Meeting
                         {
+                            Theme = "Talk about why Git is better than TFVS",
                             StartTime = DateTime.Now,
                             EndTime = DateTime.Now + TimeSpan.FromHours(1),
                             MeetingRoom = room

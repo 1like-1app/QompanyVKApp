@@ -45,7 +45,7 @@
                                     <ul v-if="employees.length" class="list-of-members">
                                         <li v-for="employee in meeting.employeeMeetings">
                                             <div class="member-elem">
-                                                <button class="close btn-cls" type="button">×</button>
+                                                <button class="close btn-cls" v-on:click="deleteMember(employee.id)" type="button">×</button>
                                                 <img src="./photo.jpg" alt="Фото" height="50" width="50">
                                                 <span class="name">
                                                     <b>{{employee.firstName}}</b>
@@ -123,7 +123,8 @@
                                             </span>
                                         </label>
                                         <div class="checkbox-right">
-                                            <input class="add-checkbox" type="checkbox" id="box1" :value="employee.id" v-on:click="checkboxToggle(employee.id)">
+                                            <input class="add-checkbox" type="checkbox" id="box1" :value="employee.id"
+                                             v-on:click="checkboxToggle(employee.id)" v-model="checkedEmployees">
                                         </div>
                                     </div>
                                 </li>

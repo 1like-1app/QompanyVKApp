@@ -10,6 +10,7 @@ export default class BookingForm extends Vue {
     meeting: Meeting = new Meeting();
     meetings: Meeting[] = [];
     employees: Employee[] = [];
+    checkedEmployees = [];
     checkboxToggle(id: number) {
         let b = this.meeting.employeeMeetings.filter(e => e.id == id);
         if (b.length) {
@@ -21,7 +22,13 @@ export default class BookingForm extends Vue {
         //alert(JSON.stringify(this.meeting.employeeMeetings));
     }
 
-
+    deleteMember(id:number){
+        let b = this.meeting.employeeMeetings.filter(e => e.id == id);
+        if (b.length) {
+            this.meeting.employeeMeetings = this.meeting.employeeMeetings.filter(e => e.id != b[0].id);
+            this.checkedEmployees = this.checkedEmployees.filter(e => e != id);
+        }
+    }
     onSubmit(submitEvent: any) {
         this.meeting.startTime = new Date(this.date.toString() + 'T' + this.meeting.startTime.toString());
         this.meeting.endTime = new Date(this.date.toString() + 'T' + this.meeting.endTime.toString());

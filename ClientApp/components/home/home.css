@@ -18,6 +18,13 @@
     font-weight: bold;
 }
 
+@media (max-width: 768px) {
+    .main-home  .button-place .btn{
+        width: 100%;
+        margin: 10px auto;
+    }
+}
+
 .list-of-members{
     float: left;
     overflow: auto;

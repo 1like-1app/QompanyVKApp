@@ -7,10 +7,6 @@
     text-align: center;
 }
 
-.modal-first {
-    margin-top: 15%;
-}
-
 .button-book {
     margin-left: 40%;
     color: #062f41;
@@ -22,12 +18,6 @@
     font-weight: bold;
 }
 
-.booking-submit {
-    margin-top: 3%;
-}
-
 @media (max-width: 768px) {
-    .button-another-book {
-        margin-top:3%;
-    }
+    
 }

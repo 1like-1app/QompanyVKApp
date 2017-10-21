@@ -18,7 +18,7 @@ export default class BookingForm extends Vue {
         else {
             this.meeting.employeeMeetings.push(this.employees.filter(e => e.id == id)[0]);
         }
-        alert(JSON.stringify(this.meeting.employeeMeetings));
+        //alert(JSON.stringify(this.meeting.employeeMeetings));
     }
 
 

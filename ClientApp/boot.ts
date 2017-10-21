@@ -10,7 +10,7 @@ Vue.use(VueRouter);
 
 const routes = [
     { path: '/', component: require('./components/home/home.vue.html') },
-    { path: '/counter', component: require('./components/counter/counter.vue.html') },
+    { path: '/templates', component: require('./components/templates/templates.vue.html') },
     { path: '/fetchdata', component: require('./components/fetchdata/fetchdata.vue.html') },
     { path: '/meetings', component: require('./components/meetings/fetchmeetings.vue.html') }
 ];

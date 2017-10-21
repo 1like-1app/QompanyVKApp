@@ -23,6 +23,11 @@ namespace QompanyVKApp.Data
                 .HasOne(em => em.Employee)
                 .WithMany(e => e.EmployeeMeetings)
                 .HasForeignKey(em => em.EmployeeId);
+
+            modelBuilder.Entity<MeetingRoom>()
+                .HasMany(c => c.Meetings)
+                .WithOne(e => e.MeetingRoom)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<MeetingRoom> MeetingRooms { get; set; }

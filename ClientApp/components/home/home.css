@@ -1,0 +1,23 @@
+.main-home  .button-place{
+    padding-top: 20px;
+    margin: 0 auto;
+}
+
+.modal-header {
+    text-align: center;
+}
+
+.button-book {
+    margin-left: 40%;
+    color: #062f41;
+}
+
+.form-room-for-ivent {
+    text-align: center;
+    color: #1a45a1;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    
+}

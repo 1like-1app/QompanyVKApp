@@ -52,7 +52,7 @@ namespace QompanyVKApp.Controllers
         /// api/meetingRooms/GetSatisfyingRoom/2009-06-15T13:45:30/2012-04-09T11:59:32
         /// </example>
         [HttpGet("[action]/{startTime}/{endTime}")]
-        public IEnumerable<MeetingRoom> GetSatisfyingRoom([FromRoute]DateTime startTime, DateTime endTime)
+        public IEnumerable<MeetingRoom> GetSatisfyingRooms([FromRoute]DateTime startTime, DateTime endTime)
         {
             var meetingRooms = _context.MeetingRooms.Include(mr => mr.Meetings).ToList();
             var k =  meetingRooms.Where(mr => mr.Meetings.Any(x => x.EndTime < startTime || x.StartTime > endTime)).ToList();

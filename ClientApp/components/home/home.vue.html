@@ -40,45 +40,23 @@
                                 <div class="form-group col-md-2 col-sm-2 col-xs-12">
                                     <label for="ivent-members">Участники:</label>
                                 </div>
+
                                 <div class="form-group col-md-6 col-sm-6 col-xs-8">
-                                    <ul class="list-of-members">
-                                        <li>
+                                    <ul v-if="employees.length" class="list-of-members">
+                                        <li v-for="employee in meeting.employees">
                                             <div class="member-elem">
                                                 <button class="close btn-cls" type="button">×</button>
                                                 <img src="./photo.jpg" alt="Фото" height="50" width="50">
                                                 <span class="name">
-                                                    <b>Имя</b>
+                                                    <b>{{employee.firstName}}</b>
                                                 </span>
                                                 <span class="secName">
-                                                    <b>Фамилия</b>
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="member-elem">
-                                                <button class="close btn-cls" type="button">×</button>
-                                                <img src="./photo.jpg" alt="Фото" height="50" width="50">
-                                                <span class="name">
-                                                    <b>Имя</b>
-                                                </span>
-                                                <span class="secName">
-                                                    <b>Фамилия</b>
-                                                </span>
-                                            </div>
-                                            <div class="member-elem">
-                                                <button class="close btn-cls" type="button">×</button>
-                                                <img src="./photo.jpg" alt="Фото" height="50" width="50">
-                                                <span class="name">
-                                                    <b>Имя</b>
-                                                </span>
-                                                <span class="secName">
-                                                    <b>Фамилия</b>
+                                                    <b>{{employee.lastName}}</b>
                                                 </span>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
-                                <!-- Place for ts script -->
                                 <div class="form-group col-md-4 col-sm-4 col-xs-2">
                                     <button class="btn btn-info button-new-member" type="button" data-toggle="modal" data-target="#modalMembers">Добавить</button>
                                 </div>
@@ -133,33 +111,19 @@
                     <div class="modal-body">
                         <form role="form" method="post" name="adding-new-members">
                             <ul class="list-of-new-members">
-                                <li>
+                                <li v-for="employee in employees">
                                     <div class="new-member-elem">
                                         <img src="./photo.jpg" alt="Фото" height="50" width="50">
                                         <label for="box1">
                                             <span class="name">
-                                                <b>Имя</b>
+                                                <b>{{employee.firstName}}</b>
                                             </span>
                                             <span class="secName">
-                                                <b>Фамилия</b>
+                                                <b>{{employee.lastName}}</b>
                                             </span>
                                         </label>
                                         <div class="checkbox-right">
-                                            <input class="add-checkbox" type="checkbox" id="box1" value="">
-                                        </div>
-                                    </div>
-                                    <div class="new-member-elem">
-                                        <img src="./photo.jpg" alt="Фото" height="50" width="50">
-                                        <label for="box2">
-                                            <span class="name">
-                                                <b>Имя</b>
-                                            </span>
-                                            <span class="secName">
-                                                <b>Фамилия</b>
-                                            </span>
-                                        </label>
-                                        <div class="checkbox-right">
-                                            <input class="add-checkbox" type="checkbox" id="box2" value="">
+                                            <input class="add-checkbox" type="checkbox"  id="box1" value="">
                                         </div>
                                     </div>
                                 </li>

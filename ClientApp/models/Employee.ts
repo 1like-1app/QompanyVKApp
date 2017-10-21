@@ -1,10 +1,9 @@
 ﻿import {Meeting} from "./meeting"
 
-export interface Employee {
-    Id: number;
-    VKId: string;
-    FirstName: string;
-    LastName: string;
-    EmployeeMeetings: Meeting[];
-
+export class Employee {
+    id: number;
+    vKId: string;
+    firstName: string;
+    lastName: string;
+    employeeMeetings: Meeting[];
 }

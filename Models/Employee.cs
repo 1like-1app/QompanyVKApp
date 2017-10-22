@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using QompanyVKApp.Data;
@@ -16,7 +17,7 @@ namespace QompanyVKApp.Models
         public int Id { get; set; }
         // ReSharper disable once InconsistentNaming
         public string VKId { get; set; }
-        public System.Uri Photo { get; set; }
+        public string Photo { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public ICollection<EmployeeMeeting> EmployeeMeetings { get; set; } = new List<EmployeeMeeting>();

@@ -64,7 +64,7 @@ namespace QompanyVKApp.Controllers
                 VKId = employee.Id.ToString(),
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
-                Photo = employee.Photo50,
+                Photo = employee.Photo50.ToString(),
                 Group = _context.Groups.First(g => g.VKId == employee.Id.ToString())
             });
         }

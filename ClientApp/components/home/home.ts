@@ -10,13 +10,45 @@ declare var VK: any;
 @Component
 export default class BookingForm extends Vue {
     key: string = "2ac16aae8e4c27d2a2dcc77d95a5c1e13226f48f5a6ad3de7eca8f261b9a45688ab6d1b91bd3259cfb79d";
-    date: string = new Date().toISOString().split('T')[0];
-    meeting: Meeting = new Meeting();
+    date: Date = new Date();
+    meeting: Meeting = new Meeting()
     meetings: Meeting[] = [];
     employees: Employee[] = [];
     checkedEmployees = [];
     init: boolean = false;
     currentGroup: string = "";
+    selected: string = '';
+    rooms: MeetingRoom[] = [];
+    duration: Date[] = [new Date((new Date()).setHours((new Date).getHours() + 2)), new Date((new Date()).setHours((new Date).getHours() + 3))];
+
+
+    @Watch('date', { immediate: true, deep: true })
+    dateOnPropertyChanged(value: Date, oldValue: Date) {
+        console.log(JSON.stringify(value));        
+        this.getRoomsForMeeting();
+    }
+
+    @Watch('duration', { immediate: true, deep: true })
+    meetingOnPropertyChanged(value: Date[], oldValue: Date[]) {
+        console.log(JSON.stringify(value));
+        this.getRoomsForMeeting();
+    }
+
+    getRoomsForMeeting() {
+        let query = 'api/MeetingRooms/GetSatisfyingRooms/' + this.duration[0].toISOString() + "/" + this.duration[1].toISOString();
+        //console.log(query);
+        fetch(query)
+            .then(response => response.json() as Promise<MeetingRoom[]>)
+            .then(data => {
+                this.rooms = data;
+            })
+            .then(x => {
+                if (this.rooms.length)
+                    this.selected = this.rooms[0].name;
+                else
+                    this.selected = "К сожалению, все переговорные в это время заняты, попробуйте выбрать другое время";
+            });
+    }
 
     checkboxToggle(id: number) {
         let b = this.meeting.employeeMeetings.filter(e => e.id == id);
@@ -70,8 +102,9 @@ export default class BookingForm extends Vue {
         }
     }
     onSubmit(submitEvent: any) {
-        this.meeting.startTime = new Date(this.date.toString() + 'T' + this.meeting.startTime.toString());
-        this.meeting.endTime = new Date(this.date.toString() + 'T' + this.meeting.endTime.toString());
+        this.meeting.startTime = this.duration[0];
+        this.meeting.endTime = this.duration[1];
+        this.meeting.meetingRoom = this.rooms.filter(r=> r.name === this.selected )[0];
         if (submitEvent) submitEvent.preventDefault();
 
         fetch('api/meetings', {

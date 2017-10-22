@@ -23,6 +23,8 @@
     "vue-template-compiler": "^2.5.2",
     "webpack": "^2.2.0",
     "webpack-hot-middleware": "^2.12.2",
-    "vue-event-calendar": "^1.4.13"
+    "vue-event-calendar": "^1.4.13",
+    "element-ui": "^1.4.7",
+    "vue-form-wizard": "^0.7.0"
   }
 }

@@ -12,31 +12,37 @@ export default class BookingForm extends Vue {
     employees: Employee[] = [];
     checkedEmployees = [];
     selected: string = '';
-    rooms: MeetingRoom[] = []; 
+    rooms: MeetingRoom[] = [];
+
 
     @Watch('date', { immediate: true, deep: true })
     dateOnPropertyChanged(value: string, oldValue: string) {
-        console.log(value + oldValue);
+        this.getRoomsForMeeting();
     }
 
     @Watch('meeting', { immediate: true, deep: true })
     meetingOnPropertyChanged(value: Meeting, oldValue: Meeting) {
-        console.log(JSON.stringify(value));
         if (typeof value.startTime === "string" && typeof value.endTime === "string") {
-            let startTime = new Date(this.date.toString() + 'T' + value.startTime);
-            let endTime = new Date(this.date.toString() + 'T' + value.endTime);
-            let query = 'api/MeetingRooms/GetSatisfyingRooms/' + startTime.toISOString() + "/" + endTime.toISOString();
-            console.log(query);
-            fetch(query)
-                .then(response => response.json() as Promise<MeetingRoom[]>)
-                .then(data => {
-                    this.rooms = data;
-                })
-                .then(x => {
-                    if (this.rooms.length)
-                        this.selected = this.rooms[0].name;
-                });
+            this.getRoomsForMeeting();
         }
+    }
+
+    getRoomsForMeeting() {
+        let startTime = new Date(this.date.toString() + 'T' + this.meeting.startTime);
+        let endTime = new Date(this.date.toString() + 'T' + this.meeting.endTime);
+        let query = 'api/MeetingRooms/GetSatisfyingRooms/' + startTime.toISOString() + "/" + endTime.toISOString();
+        console.log(query);
+        fetch(query)
+            .then(response => response.json() as Promise<MeetingRoom[]>)
+            .then(data => {
+                this.rooms = data;
+            })
+            .then(x => {
+                if (this.rooms.length)
+                    this.selected = this.rooms[0].name;
+                else
+                    this.selected = "К сожалению, все переговорные в это время заняты, попробуйте выбрать другое время";
+            });
     }
 
     checkboxToggle(id: number) {
@@ -60,6 +66,7 @@ export default class BookingForm extends Vue {
     onSubmit(submitEvent: any) {
         this.meeting.startTime = new Date(this.date.toString() + 'T' + this.meeting.startTime.toString());
         this.meeting.endTime = new Date(this.date.toString() + 'T' + this.meeting.endTime.toString());
+        this.meeting.meetingRoom = this.rooms.filter(r=> r.name === this.selected )[0];
         if (submitEvent) submitEvent.preventDefault();
 
         fetch('api/meetings', {

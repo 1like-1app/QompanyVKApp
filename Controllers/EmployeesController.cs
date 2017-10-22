@@ -49,15 +49,15 @@ namespace QompanyVKApp.Controllers
                 Fields = UsersFields.Photo50,
             });
             var employees = VkUserToEmployeeConverter(vkUsers);
-            var newEmployees = employees.Where(p => _context.Employees.All(l => p.VKId != l.VKId));
-            var deletedEmployees = _context.Employees.Where(p => employees.All(l => p.VKId != l.VKId));
+            var newEmployees = employees.Where(p => _context.Employees.All(l => p.VKId != l.VKId) && p.VKId == vkId);
+            var deletedEmployees = _context.Employees.Where(p => employees.All(l => p.VKId != l.VKId) && p.VKId == vkId);
             _context.Employees.AddRange(newEmployees);
             _context.Employees.RemoveRange(deletedEmployees);
             _context.SaveChanges();
             return _context.Employees;
         }
 
-        public IEnumerable<Employee> VkUserToEmployeeConverter(VkCollection<User> users)
+        public List<Employee> VkUserToEmployeeConverter(VkCollection<User> users)
         {
             return users.Select(employee => new Employee
             {
@@ -65,8 +65,8 @@ namespace QompanyVKApp.Controllers
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
                 Photo = employee.Photo50.ToString(),
-                Group = _context.Groups.First(g => g.VKId == employee.Id.ToString())
-            });
+                Group = _context.Groups.FirstOrDefault(g => g.VKId == employee.Id.ToString())
+            }).ToList(); ;
         }
 
         [HttpGet("[action]/{meetingId}")]

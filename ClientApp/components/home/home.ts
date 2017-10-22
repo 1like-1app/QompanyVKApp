@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import { Meeting } from "../../models/meeting"
-import { Component } from 'vue-property-decorator';
+import { Component, Watch } from 'vue-property-decorator';
 import { Employee } from '../../models/Employee';
 import { Group } from '../../models/Group';
+import { MeetingRoom } from '../../models/MeetingRoom';
 
 declare var VK: any;
 
@@ -130,6 +131,7 @@ export default class BookingForm extends Vue {
 
                     flashVars[curr[0]] = curr[1];
                 }
+                console.log(flashVars);
                 if (flashVars['api_settings'] == 0) {
                     VK.addCallback('onGroupSettingsChanged', function f(bytes, newkey) {
                         console.log(newkey);

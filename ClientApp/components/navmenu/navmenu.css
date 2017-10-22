@@ -19,25 +19,6 @@
     z-index: 1;
 }
 
-@media (min-width: 831px) {
-    .main-nav .navbar-header {
-        padding-right: 10px;
-        border-right: 2px solid #444;
-    }
-    .main-nav .navbar-collapse {
-        margin-left: 25%;   
-        padding: 0px;
-    }
-    .main-nav .navbar li {
-        float: left;
-        font-size: 15px;
-        margin: 6px;
-    }
-    .main-nav .navbar li a {
-        padding: 10px 16px;
-        margin-left: 10%;
-    }
-}
 @media (min-width: 768px) {
     /* On small screens, convert the nav menu to a vertical sidebar */
     .main-nav {
@@ -54,7 +35,7 @@
         border-right: 2px solid #444;
     }
     .main-nav .navbar-collapse {
-        /* margin-left: 22%;    */
+        margin-left: 22%;    
         padding: 0px;
     }
     .main-nav .navbar li {
@@ -73,15 +54,5 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
-}
-@media (max-width: 800px){
-    .navbar ul{
-        float: right;
-    }
-    .main-nav .navbar li a {
-        padding: 10px 16px;
-        border-radius: 2px;
-        margin-left: 10%;
     }
 }

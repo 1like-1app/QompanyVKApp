@@ -12,6 +12,10 @@
     color: #062f41;
 }
 
+.room-ivent {
+    margin-top: 6px;
+}
+
 .form-room-for-ivent {
     text-align: center;
     color: #1a45a1;
@@ -156,7 +160,6 @@
 
     .booking-submit {
         height: 45px;
-        margin-top: -25px;
     }
 
     #myModal .modal-footer {
@@ -169,5 +172,9 @@
 
     .div-checkbox-share {
         margin-top: 10px;
+    }
+
+    .button-another-book {
+        margin-top: 20px;
     }
 }

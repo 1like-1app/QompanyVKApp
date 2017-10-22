@@ -11,6 +11,7 @@
     <None Remove="ClientApp\models\Employee.ts" />
     <None Remove="ClientApp\models\meeting.ts" />
     <None Remove="ClientApp\models\MeetingRoom.ts" />
+    <None Remove="Properties\PublishProfiles\QompanyVKApp20171020064207 - Web Deploy.pubxml" />
   </ItemGroup>
   
   

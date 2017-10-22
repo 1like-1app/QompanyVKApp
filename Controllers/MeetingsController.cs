@@ -88,6 +88,7 @@ namespace QompanyVKApp.Controllers
                 return BadRequest(ModelState);
             }
             meeting.MeetingRoom = _context.MeetingRooms.Single(r => r.Id == meeting.MeetingRoom.Id);
+            meeting.EmployeeMeetings = null;
             _context.Meetings.Add(meeting);
             await _context.SaveChangesAsync();
 

@@ -4,8 +4,12 @@ import { Component, Watch } from 'vue-property-decorator';
 import { Employee } from '../../models/Employee';
 import { MeetingRoom } from '../../models/MeetingRoom';
 
+declare var VK: any;
+
+
 @Component
 export default class BookingForm extends Vue {
+    key: string = "2ac16aae8e4c27d2a2dcc77d95a5c1e13226f48f5a6ad3de7eca8f261b9a45688ab6d1b91bd3259cfb79d";
     date: string = new Date().toISOString().split('T')[0];
     meeting: Meeting = new Meeting()
     meetings: Meeting[] = [];
@@ -40,6 +44,7 @@ export default class BookingForm extends Vue {
     }
 
     checkboxToggle(id: number) {
+        //VK.callMethod("showGroupSettingsBox", 4096);
         let b = this.meeting.employeeMeetings.filter(e => e.id == id);
         if (b.length) {
             this.meeting.employeeMeetings = this.meeting.employeeMeetings.filter(e => e.id != b[0].id);
@@ -48,6 +53,36 @@ export default class BookingForm extends Vue {
             this.meeting.employeeMeetings.push(this.employees.filter(e => e.id == id)[0]);
         }
     }
+    callApi() {
+        var self = this;
+        VK.init(function () {
+            var parts = document.location.search.substr(1).split("&");
+            var flashVars = {},
+                curr;  
+            for (var i = 0; i < parts.length; i++) {    
+                curr = parts[i].split('=');     // записываем в массив flashVars значения. Например: flashVars['viewer_id'] = 1;
+                    
+                flashVars[curr[0]] = curr[1];
+            }  
+            console.log(flashVars); 
+            alert(flashVars['access_token']);
+            // VK.addCallback('onGroupSettingsChanged', function f(bytes, newkey){ 
+            //     self.key = newkey; 
+            //     console.log(newkey);
+            // });
+            // VK.callMethod("showAllowMessagesFromCommunityBox");            
+            // VK.addCallback('onAllowMessagesFromCommunity', function f() {
+                VK.api(
+                    "messages.send", {user_id: 12520313, access_token: '40099039dc84bbba636fff7051de15181a2da99a439ae66557e5646a64f36d75faebb023eb4cc7e2d86f6', message: 'Yeaaahhh!', v: '5.68'  },
+                    function (data) {
+                        alert(JSON.stringify(data));
+                    }
+                )
+            //});
+            VK.addCallback('onAllowMessagesFromCommunityCancel', function f() {
+                alert("Vse ploho!");
+            });
+        }, function () { }, '5.68');
 
     deleteMember(id: number) {
         let b = this.meeting.employeeMeetings.filter(e => e.id == id);
@@ -71,8 +106,19 @@ export default class BookingForm extends Vue {
             })
         })
     }
+    updated() {
 
+        // 
+
+
+        // VK.api(
+        //     "users.get", { },
+        //     function (data) {
+        //         alert(JSON.stringify(data.response));
+        //     });
+    }
     mounted() {
+
         fetch('api/Meetings/GetMeetings')
             .then(response => response.json() as Promise<Meeting[]>)
             .then(data => {

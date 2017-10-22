@@ -8,7 +8,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close right-close" type="button" data-dismiss="modal">×</button>
-                        <h4 class="modal-title">Бронирование переговорной</h4>
+                        <h4 class="modal-title">Бронирование комнаты</h4>
                     </div>
                     <div class="modal-body">
                         <form role="form" method="post" name="booking">
@@ -63,7 +63,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <label for="ivent-room">Ваша переговорная:</label>
+                                    <label for="ivent-room">Ваша комната:</label>
                                 </div>
                                 <div class="form group room-ivent col-md-4 col-sm-4 col-xs-4">
                                     <input type="text" value="773/a" class="form-control form-room-for-ivent" id="ivent-room" name="ivent-room">
@@ -75,7 +75,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="booking-subm"></label>
-                                <input type="submit" name="booking-subm" class="form-control btn btn-success booking-submit" value="Забронировать">
+                                <input type="submit" name="booking-subm" class="form-control btn btn-success booking-submit" data-dismiss="modal" data-toggle="modal"
+                                    data-target="#modalResult" value="Забронировать">
                             </div>
                         </form>
                     </div>
@@ -94,7 +95,7 @@
                         <button class="close right-close" type="button" data-dismiss="modal">×</button>
                         <h4 class="modal-title">Выбор комнаты</h4>
                     </div>
-                    <div class="modal-body">Кажется, вам не понравилась предложенная переговорная!</div>
+                    <div class="modal-body">Кажется, вам не понравилась предложенная комната!</div>
                     <div class="modal-footer">
                         <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
                     </div>
@@ -123,8 +124,7 @@
                                             </span>
                                         </label>
                                         <div class="checkbox-right">
-                                            <input class="add-checkbox" type="checkbox" id="box1" :value="employee.id"
-                                             v-on:click="checkboxToggle(employee.id)" v-model="checkedEmployees">
+                                            <input class="add-checkbox" type="checkbox" id="box1" :value="employee.id" v-on:click="checkboxToggle(employee.id)" v-model="checkedEmployees">
                                         </div>
                                     </div>
                                 </li>
@@ -134,20 +134,51 @@
                                 <input type="submit" name="adding-end" class="form-control btn btn-success adding-submit" data-dismiss="modal" value="ОК">
                             </div>
                         </form>
-                        </div>
                     </div>
                 </div>
             </div>
-            <vue-event-calendar :events="meetings">
-                <template scope="props">
-                    <div v-for="(event, index) in props.showEvents" class="event-item">
-                        <h3 class="title">{{index+1}}. {{event.title}}</h3>
-                        <p class="time">{{new Date(event.startTime).toISOString().split('T')[0]}}</p>
-                        <p class="desc">{{event.date}}</p>
-                    </div>
-                </template>
-            </vue-event-calendar>
         </div>
+        <div id="modalResult" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content modal-result">
+                    <div class="modal-body">
+                        <form role="form" method="post" name="adding-new-members">
+                            <div class="form-group">
+                                <div class="panel panel-success panel-result">
+                                    <div class="panel-heading">Добавлено</div>
+                                    <div class="panel-body">
+                                        Ваша комната:
+                                        <span class="span-room">773/a</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group share-message">
+                                <div class=" col-md-9 col-sm-9 col-xs-9">
+                                    <p>Отправить уведомление участникам?</p>
+                                </div>
+                                <div class="col-md-3 col-sm-3 cols-xs-2">
+                                    <input class="checkbox-share" type="checkbox" name="share-checkbox" id="share-checkbox">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="adding-end"></label>
+                                <input type="submit" name="adding-end" class="form-control btn btn-success share-submit" data-dismiss="modal" value="ОК">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <vue-event-calendar :events="meetings">
+            <template scope="props">
+                <div v-for="(event, index) in props.showEvents" class="event-item">
+                    <h3 class="title">{{index+1}}. {{event.title}}</h3>
+                    <p class="time">{{new Date(event.startTime).toISOString().split('T')[0]}}</p>
+                    <p class="desc">{{event.date}}</p>
+                </div>
+            </template>
+        </vue-event-calendar>
+    </div>
 </template>
 
 <!-- <script src="./home.ts"> -->

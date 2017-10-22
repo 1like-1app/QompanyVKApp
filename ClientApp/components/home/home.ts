@@ -10,7 +10,9 @@ Vue.use(ElementUI, { locale })
 new Vue({
     el: '#doubleclock'
 })
-
+new Vue({
+    el: "#block"
+})
 // var m = {
 //     data() {
 //       return {

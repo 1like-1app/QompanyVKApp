@@ -19,8 +19,14 @@
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-6">
                                     <label for="ivent-date">Дата:</label>
-                                    <input type="date" class="form-control ivent-date-field" id="ivent-date" name="ivent-date">
-                                </div>
+                                    <div class="dateblock">
+                                            <el-date-picker v-model="value1" type="date" placeholder="Выберите дату">
+                                            </el-date-picker>
+                                          </div>
+                                          <!-- <div class="block"> -->
+                                    <!-- <input type="date" class="form-control ivent-date-field" id="ivent-date" name="ivent-date"> -->
+                                <!-- </div> -->
+                            </div>
                             </div>
                             <div class="row">
                                 <!-- <div class="form-group col-md-3 col-sm-3 col-xs-5">

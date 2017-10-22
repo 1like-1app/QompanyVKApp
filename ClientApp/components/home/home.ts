@@ -1,16 +1,44 @@
 import Vue from 'vue';
-import { Meeting } from "../../models/meeting"
-import { Component } from 'vue-property-decorator';
+import { Meeting } from "../../models/Meeting"
+import { Component, Watch } from 'vue-property-decorator';
 import { Employee } from '../../models/Employee';
-
+import { MeetingRoom } from '../../models/MeetingRoom';
 
 @Component
 export default class BookingForm extends Vue {
     date: string = new Date().toISOString().split('T')[0];
-    meeting: Meeting = new Meeting();
+    meeting: Meeting = new Meeting()
     meetings: Meeting[] = [];
     employees: Employee[] = [];
     checkedEmployees = [];
+    selected: string = '';
+    rooms: MeetingRoom[] = []; 
+
+    @Watch('date', { immediate: true, deep: true })
+    dateOnPropertyChanged(value: string, oldValue: string) {
+        console.log(value + oldValue);
+    }
+
+    @Watch('meeting', { immediate: true, deep: true })
+    meetingOnPropertyChanged(value: Meeting, oldValue: Meeting) {
+        console.log(JSON.stringify(value));
+        if (typeof value.startTime === "string" && typeof value.endTime === "string") {
+            let startTime = new Date(this.date.toString() + 'T' + value.startTime);
+            let endTime = new Date(this.date.toString() + 'T' + value.endTime);
+            let query = 'api/MeetingRooms/GetSatisfyingRooms/' + startTime.toISOString() + "/" + endTime.toISOString();
+            console.log(query);
+            fetch(query)
+                .then(response => response.json() as Promise<MeetingRoom[]>)
+                .then(data => {
+                    this.rooms = data;
+                })
+                .then(x => {
+                    if (this.rooms.length)
+                        this.selected = this.rooms[0].name;
+                });
+        }
+    }
+
     checkboxToggle(id: number) {
         let b = this.meeting.employeeMeetings.filter(e => e.id == id);
         if (b.length) {
@@ -19,16 +47,16 @@ export default class BookingForm extends Vue {
         else {
             this.meeting.employeeMeetings.push(this.employees.filter(e => e.id == id)[0]);
         }
-        //alert(JSON.stringify(this.meeting.employeeMeetings));
     }
 
-    deleteMember(id:number){
+    deleteMember(id: number) {
         let b = this.meeting.employeeMeetings.filter(e => e.id == id);
         if (b.length) {
             this.meeting.employeeMeetings = this.meeting.employeeMeetings.filter(e => e.id != b[0].id);
             this.checkedEmployees = this.checkedEmployees.filter(e => e != id);
         }
     }
+
     onSubmit(submitEvent: any) {
         this.meeting.startTime = new Date(this.date.toString() + 'T' + this.meeting.startTime.toString());
         this.meeting.endTime = new Date(this.date.toString() + 'T' + this.meeting.endTime.toString());

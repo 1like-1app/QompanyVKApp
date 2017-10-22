@@ -47,7 +47,8 @@ namespace QompanyVKApp.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     MeetingRoomId = table.Column<int>(type: "int", nullable: true),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Theme = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,7 +58,7 @@ namespace QompanyVKApp.Migrations
                         column: x => x.MeetingRoomId,
                         principalTable: "MeetingRooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

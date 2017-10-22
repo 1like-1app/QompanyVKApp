@@ -11,8 +11,8 @@ using System;
 namespace QompanyVKApp.Migrations
 {
     [DbContext(typeof(QompanyDbContext))]
-    [Migration("20171021194637_Cascade")]
-    partial class Cascade
+    [Migration("20171021205203_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

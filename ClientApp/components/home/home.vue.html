@@ -11,15 +11,15 @@
                         <h4 class="modal-title">Бронирование переговорной</h4>
                     </div>
                     <div class="modal-body">
-                        <form role="form" method="post" name="booking" v-on:submit.prevent="onSubmit"> 
+                        <form role="form" method="post" name="booking" v-on:submit.prevent="onSubmit">
                             <div class="row">
                                 <div class="form-group col-md-8 col-sm-8 col-xs-6">
                                     <label for="ivent-name">Мероприятие:</label>
-                                    <input type="text" v-model="meeting.theme" class="form-control ivent-name-field" id="ivent-name" name="ivent-name" placeholder="Название мероприятия"> 
+                                    <input type="text" v-model="meeting.theme" class="form-control ivent-name-field" id="ivent-name" name="ivent-name" placeholder="Название мероприятия">
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-6">
                                     <label for="ivent-date">Дата:</label>
-                                    <input type="date" v-model="date" class="form-control ivent-date-field" id="ivent-date" name="ivent-date"> 
+                                    <input type="date" v-model="date" class="form-control ivent-date-field" id="ivent-date" name="ivent-date">
                                 </div>
                             </div>
                             <div class="row">
@@ -27,7 +27,7 @@
                                     <label for="ivent-time1">
                                         <b>С:</b>
                                     </label>
-                                    <input type="time" v-model="meeting.startTime" class="form-control ivent-time1-field" id="ivent-time1" name="ivent-time1"> 
+                                    <input type="time" v-model="meeting.startTime" class="form-control ivent-time1-field" id="ivent-time1" name="ivent-time1">
                                 </div>
                                 <div class="form-group col-md-3 col-sm-3 col-xs-5">
                                     <label for="ivent-time2">
@@ -63,11 +63,25 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <label for="ivent-room">Ваша переговорная:</label>
+                                    <label for="ivent-room">Выберете желаемую Вами переговорную:</label>
                                 </div>
-                                <div class="form group room-ivent col-md-4 col-sm-4 col-xs-4">
+                                <div>
+                                    <div v-if="rooms.length">
+                                        <select v-model="selected">
+                                            <option v-for="room in rooms" v-bind:value="room.name">
+                                                <div class="form group room-ivent col-md-4 col-sm-4 col-xs-4">
+                                                    {{ room.name }}
+                                                </div>
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div v-else>
+                                        <em>Выберите время и здесь появятся подходящие переговорные комнаты</em>
+                                    </div>
+                                </div>
+                                <!-- <div class="form group room-ivent col-md-4 col-sm-4 col-xs-4">
                                     <input type="text" value="773/a" class="form-control form-room-for-ivent" id="ivent-room" name="ivent-room">
-                                </div>
+                                </div> -->
                                 <!-- After this new modal will open -->
                                 <div class="form-group col-md-4 col-sm-4 col-xs-8">
                                     <button name="new-room" class="btn btn-info button-another-book" type="button" data-toggle="modal" data-target="#modalRoom">Выбрать другую</button>
@@ -123,8 +137,7 @@
                                             </span>
                                         </label>
                                         <div class="checkbox-right">
-                                            <input class="add-checkbox" type="checkbox" id="box1" :value="employee.id"
-                                             v-on:click="checkboxToggle(employee.id)" v-model="checkedEmployees">
+                                            <input class="add-checkbox" type="checkbox" id="box1" :value="employee.id" v-on:click="checkboxToggle(employee.id)" v-model="checkedEmployees">
                                         </div>
                                     </div>
                                 </li>
@@ -134,20 +147,20 @@
                                 <input type="submit" name="adding-end" class="form-control btn btn-success adding-submit" data-dismiss="modal" value="ОК">
                             </div>
                         </form>
-                        </div>
                     </div>
                 </div>
             </div>
-            <vue-event-calendar :events="meetings">
-                <template scope="props">
-                    <div v-for="(event, index) in props.showEvents" class="event-item">
-                        <h3 class="title">{{index+1}}. {{event.title}}</h3>
-                        <p class="time">{{new Date(event.startTime).toISOString().split('T')[0]}}</p>
-                        <p class="desc">{{event.date}}</p>
-                    </div>
-                </template>
-            </vue-event-calendar>
         </div>
+        <vue-event-calendar :events="meetings">
+            <template scope="props">
+                <div v-for="(event, index) in props.showEvents" class="event-item">
+                    <h3 class="title">{{index+1}}. {{event.title}}</h3>
+                    <p class="time">{{new Date(event.startTime).toISOString().split('T')[0]}}</p>
+                    <p class="desc">{{event.date}}</p>
+                </div>
+            </template>
+        </vue-event-calendar>
+    </div>
 </template>
 
 <!-- <script src="./home.ts"> -->

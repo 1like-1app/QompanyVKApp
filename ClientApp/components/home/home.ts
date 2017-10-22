@@ -11,7 +11,8 @@ export default class BookingForm extends Vue {
     meetings: Meeting[] = [];
     employees: Employee[] = [];
     checkedEmployees = [];
-    rooms: MeetingRoom[] = [];
+    selected: string = '';
+    rooms: MeetingRoom[] = []; 
 
     @Watch('date', { immediate: true, deep: true })
     dateOnPropertyChanged(value: string, oldValue: string) {
@@ -26,11 +27,14 @@ export default class BookingForm extends Vue {
             let endTime = new Date(this.date.toString() + 'T' + value.endTime);
             let query = 'api/MeetingRooms/GetSatisfyingRooms/' + startTime.toISOString() + "/" + endTime.toISOString();
             console.log(query);
-            alert(query);
             fetch(query)
                 .then(response => response.json() as Promise<MeetingRoom[]>)
                 .then(data => {
                     this.rooms = data;
+                })
+                .then(x => {
+                    if (this.rooms.length)
+                        this.selected = this.rooms[0].name;
                 });
         }
     }

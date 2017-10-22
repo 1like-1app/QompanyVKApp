@@ -21,7 +21,7 @@ namespace QompanyVKApp.Controllers
         {
             _context = context;
         }
-        
+
         // GET: api/MeetingRooms
         [HttpGet("[action]")]
         public IEnumerable<MeetingRoom> GetMeetingRooms()
@@ -55,7 +55,7 @@ namespace QompanyVKApp.Controllers
         public IEnumerable<MeetingRoom> GetSatisfyingRooms([FromRoute]DateTime startTime, DateTime endTime)
         {
             var meetingRooms = _context.MeetingRooms.Include(mr => mr.Meetings).ToList();
-            var k =  meetingRooms.Where(mr => mr.Meetings.Any(x => x.EndTime < startTime || x.StartTime > endTime)).ToList();
+            var k = meetingRooms.Where(mr => mr.Meetings.Any(x => x.EndTime < startTime || x.StartTime > endTime)).ToList();
             return k.Select(x => new MeetingRoom
             {
                 Capacity = x.Capacity,

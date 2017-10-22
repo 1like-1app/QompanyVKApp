@@ -1,4 +1,4 @@
-﻿import {Meeting} from "./meeting"
+﻿import {Meeting} from "./Meeting"
 
 export class Employee {
     id: number;

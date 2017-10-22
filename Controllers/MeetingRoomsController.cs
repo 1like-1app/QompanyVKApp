@@ -29,6 +29,12 @@ namespace QompanyVKApp.Controllers
             return _context.MeetingRooms;
         }
 
+        [HttpGet("[action]/{groupId}")]
+        public IEnumerable<MeetingRoom> GetMeetingRoomsByGroupId([FromRoute] string groupId)
+        {
+            return _context.MeetingRooms.Where(g => g.Group.VKId == groupId);
+        }
+
         // GET: api/MeetingRooms/5
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetMeetingRoom([FromRoute] int id)
@@ -51,10 +57,10 @@ namespace QompanyVKApp.Controllers
         /// <example> 
         /// api/meetingRooms/GetSatisfyingRoom/2009-06-15T13:45:30/2012-04-09T11:59:32
         /// </example>
-        [HttpGet("[action]/{startTime}/{endTime}")]
-        public IEnumerable<MeetingRoom> GetSatisfyingRooms([FromRoute]DateTime startTime, DateTime endTime)
+        [HttpGet("[action]/{startTime}/{endTime}/{groupId}")]
+        public IEnumerable<MeetingRoom> GetSatisfyingRooms([FromRoute]DateTime startTime, DateTime endTime, string groupId)
         {
-            var meetingRooms = _context.MeetingRooms.Include(mr => mr.Meetings).ToList();
+            var meetingRooms = _context.MeetingRooms.Include(mr => mr.Meetings).Where(g => g.Group.VKId == groupId).ToList();
             var k = meetingRooms.Where(mr => mr.Meetings.Any(x => x.EndTime < startTime || x.StartTime > endTime)).ToList();
             return k.Select(x => new MeetingRoom
             {
@@ -114,6 +120,21 @@ namespace QompanyVKApp.Controllers
 
             return CreatedAtAction("GetMeetingRoom", new { id = meetingRoom.Id }, meetingRoom);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> PostMeetingRoomWithGroupId([FromBody] MeetingRoom meetingRoom, string groupId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            meetingRoom.Group = _context.Groups.First(g => g.VKId == groupId);
+            _context.MeetingRooms.Add(meetingRoom);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetMeetingRoom", new { id = meetingRoom.Id }, meetingRoom);
+        }
+
 
         // DELETE: api/MeetingRooms/5
         [HttpDelete("{id}")]

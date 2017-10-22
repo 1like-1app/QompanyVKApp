@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QompanyVKApp.Data;
 using QompanyVKApp.Models;
+using VkNet;
+using VkNet.Model.RequestParams;
 
 namespace QompanyVKApp.Controllers
 {
@@ -25,6 +27,13 @@ namespace QompanyVKApp.Controllers
         {
             return _context.Meetings;
         }
+
+        [HttpGet("[action]/{groupId}")]
+        public IEnumerable<Meeting> GetMeetings([FromBody]string groupId)
+        {
+            return _context.Meetings.Where(g => g.Group.VKId == groupId);
+        }
+
 
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetMeeting([FromRoute] int id)
@@ -81,8 +90,34 @@ namespace QompanyVKApp.Controllers
 
         // POST: api/Meetings
         [HttpPost]
-        public async Task<IActionResult> PostMeeting([FromBody] Meeting meeting)
+        public async Task<IActionResult> PostMeeting([FromBody] Meeting meeting, string groupId, bool notifyEmployees)
         {
+            meeting.Group = _context.Groups.First(g => g.VKId == groupId);
+
+            if (notifyEmployees)
+            {
+                var vk = new VkApi();
+                var accessToken = _context.Groups.First(g => g.VKId == groupId).AccessToken;
+                if (!String.IsNullOrEmpty(accessToken))
+                {
+                    
+                    foreach (var user in meeting.Employees)
+                    {
+                        vk.Authorize(new ApiAuthParams
+                        {
+                            AccessToken = accessToken//"40099039dc84bbba636fff7051de15181a2da99a439ae66557e5646a64f36d75faebb023eb4cc7e2d86f6"
+                        });
+                        var send = vk.Messages.Send(new MessagesSendParams
+                        {
+                            Message = $"Здравствуйте {user.FullName}!" +
+                                      $" Ваc пригласили на встречу c {meeting.StartTime} до" +
+                                      $"{meeting.EndTime} в переговорке {meeting.MeetingRoom.Name}",
+                            UserId = Convert.ToInt64(user.VKId),
+                        });
+                    }
+                }
+                
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

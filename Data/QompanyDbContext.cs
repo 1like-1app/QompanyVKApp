@@ -16,24 +16,39 @@ namespace QompanyVKApp.Data
 
             modelBuilder.Entity<EmployeeMeeting>()
                 .HasOne(em => em.Meeting)
-                .WithMany(m => m.EmployeeMeetings)
+                .WithMany("EmployeeMeetings")
                 .HasForeignKey(em => em.MeetingId);
 
             modelBuilder.Entity<EmployeeMeeting>()
                 .HasOne(em => em.Employee)
-                .WithMany(e => e.EmployeeMeetings)
+                .WithMany("EmployeeMeetings")
                 .HasForeignKey(em => em.EmployeeId);
 
             modelBuilder.Entity<MeetingRoom>()
                 .HasMany(c => c.Meetings)
                 .WithOne(e => e.MeetingRoom)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Group>()
+                .HasMany(g => g.Employees)
+                .WithOne(e => e.Group);
+
+            modelBuilder.Entity<Group>()
+                .HasMany(g => g.MeetingRooms)
+                .WithOne(e => e.Group);
+
+            modelBuilder.Entity<Group>()
+                .HasMany(g => g.Meetings)
+                .WithOne(e => e.Group);
+
+
         }
 
         public DbSet<MeetingRoom> MeetingRooms { get; set; }
         public DbSet<EmployeeMeeting> EmployeeMeetings { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Meeting> Meetings { get; set; }
+        public DbSet<QompanyVKApp.Models.Group> Groups { get; set; }
         
 
     }

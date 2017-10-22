@@ -3,6 +3,25 @@ import { Meeting } from "../../models/Meeting"
 import { Component, Watch } from 'vue-property-decorator';
 import { Employee } from '../../models/Employee';
 import { MeetingRoom } from '../../models/MeetingRoom';
+import ElementUI from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/ru-RU'
+
+Vue.use(ElementUI, { locale })
+new Vue({
+    el: '#doubleclock'
+})
+new Vue({
+    el: "#block"
+})
+// var m = {
+//     data() {
+//       return {
+//         value3: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+//       };
+//     }
+// }
+// var c = new Vue.extend(m);
+// new Ctor().$mount('#doubleclock')
 
 @Component
 export default class BookingForm extends Vue {
@@ -97,3 +116,12 @@ export default class BookingForm extends Vue {
     }
 
 }
+var Main = {
+    data() {
+      return {
+        value3: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+      };
+    }
+  }
+var Ctor = Vue.extend(Main)
+new Ctor().$mount('#doubleclock')

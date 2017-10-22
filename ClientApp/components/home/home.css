@@ -1,3 +1,7 @@
+@import url("//unpkg.com/element-ui@1.4.7/lib/theme-default/index.css");
+
+
+
 .main-home  .button-place .btn{
     margin-left: 40%;
     margin-top: 10px;
@@ -20,6 +24,15 @@
     text-align: center;
     color: #1a45a1;
     font-weight: bold;
+}
+
+.form-group{
+    max-width: 369px;
+    min-width: 220px;
+}
+
+.dateblock{
+    max-width: 195px;
 }
 
 .list-of-members{

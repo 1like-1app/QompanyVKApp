@@ -1,3 +1,7 @@
+@import url("//unpkg.com/element-ui@1.4.7/lib/theme-default/index.css");
+
+
+
 .main-home  .button-place .btn{
     margin-left: 40%;
     margin-top: 10px;

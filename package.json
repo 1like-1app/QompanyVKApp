@@ -26,6 +26,7 @@
     "vue-event-calendar": "^1.4.13"
   },
   "dependencies": {
+    "element-ui": "^1.4.7",
     "vue-form-wizard": "^0.7.0"
   }
 }

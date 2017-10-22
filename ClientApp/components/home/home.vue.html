@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-3 col-sm-3 col-xs-5">
+                                <!-- <div class="form-group col-md-3 col-sm-3 col-xs-5">
                                     <label for="ivent-time1">
                                         <b>С:</b>
                                     </label>
@@ -34,7 +34,17 @@
                                         <b>ДО:</b>
                                     </label>
                                     <input type="time" class="form-control ivent-time2-field" id="ivent-time2" name="ivent-time2">
+                                </div> -->
+                                <!-- <script src="//unpkg.com/vue/dist/vue.js"></script>
+                                <script src="//unpkg.com/element-ui@1.4.7/lib/index.js"></script> -->
                                 </div>
+                                <div id="doubleclock">
+                                <template>
+                                  <el-time-picker is-range v-model="value3" lang="ru" placeholder="Укажите время">
+                                  </el-time-picker>
+                                </template>
+
+
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-2 col-sm-2 col-xs-12">

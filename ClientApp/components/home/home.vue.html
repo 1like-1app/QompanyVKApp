@@ -62,16 +62,14 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
                                     <label for="ivent-room">Выберете желаемую Вами переговорную:</label>
                                 </div>
-                                <div>
+                                <div class="form group room-ivent col-md-5 col-sm-5 col-xs-12">
                                     <div v-if="rooms.length">
                                         <select v-model="selected">
                                             <option v-for="room in rooms" v-bind:value="room.name">
-                                                <div class="form group room-ivent col-md-4 col-sm-4 col-xs-4">
-                                                    {{ room.name }}
-                                                </div>
+                                                {{ room.name }}
                                             </option>
                                         </select>
                                     </div>
@@ -83,7 +81,7 @@
                                     <input type="text" value="773/a" class="form-control form-room-for-ivent" id="ivent-room" name="ivent-room">
                                 </div> -->
                                 <!-- After this new modal will open -->
-                                <div class="form-group col-md-4 col-sm-4 col-xs-8">
+                                <div class="form-group col-md-3 col-sm-3 col-xs-4">
                                     <button name="new-room" class="btn btn-info button-another-book" type="button" data-toggle="modal" data-target="#modalRoom">Выбрать другую</button>
                                 </div>
                             </div>

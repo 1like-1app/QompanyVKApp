@@ -5,25 +5,31 @@
                 <form-wizard @on-complete="onComplete" subtitle="Внимательно проверяйте данные: некоторые из них взяты из вашего аккаунта Вконтакте!"
                     title="Отправка данных по шаблону" color=#5bc0de back-button-text="Предыдущий шаг" next-button-text="Следующий шаг"
                     finish-button-text="Отправить данные">
-                    <tab-content title="ФИО, возраст" icon="ti-user">
+                    <tab-content title="Классификация шаблона" icon="ti-settings">
+                        <input type="text" class="form-control blah-field" v-model="type" id="ivent-blah" placeholder="Введите тип справки">
+                    </tab-content>
+                    <tab-content title="ФИO, возраст" icon="ti-user">
                         <div class="row">
-                            <input type="text" class="form-control lname-field" id="lname" placeholder="Фамилия">
+                            <input type="text" class="form-control lname-field" v-model="firstname" id="lname" placeholder="Фамилия">
                         </div>
                         <div class="row">
-                            <input type="text" class="form-control fname-field" id="fname" placeholder="Имя">
+                            <input type="text" class="form-control fname-field" v-model="lastname" id="fname" placeholder="Имя">
                         </div>
                         <div class="row">
-                            <input type="text" class="form-control dname-field" id="dname" placeholder="Отчество">
+                            <input type="text" class="form-control fname-field" v-model="patronomic" id="fname" placeholder="Отчество">
                         </div>
                         <div class="row">
-                            <input type="text" class="form-control age-field" id="age" placeholder="Возраст">
+                            <input type="text" class="form-control age-field" v-model="age" id="age" placeholder="Возраст">
                         </div>
                     </tab-content>
-                    <tab-content title="Номер бла-бла-бла" icon="ti-settings">
-                        <input type="text" class="form-control blah-field" id="ivent-blah" placeholder="Введите бла-бла-бла">
-                    </tab-content>
-                    <tab-content title="Уточка" icon="ti-check">
-                        <input type="text" class="form-control duck" id="duck" placeholder="УТКА ЕСТ ПЕЛЬМЕШКУ!!!!!">
+                    <tab-content title="Подвердите корректность данных" icon="ti-check">
+                        <div>
+                            Тип {{type}}
+                            <br/> Фамилия {{firstname}}
+                            <br/> Имя {{lastname}}
+                            <br/> Отчество {{patronomic}}
+                            <br/> Возраст{{age}}
+                        </div>
                     </tab-content>
                 </form-wizard>
             </div>

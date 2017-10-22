@@ -97,6 +97,42 @@
     margin-top: 20%;
 }
 
+.p-result {
+    margin-top: 10px;
+}
+
+.modal-result {
+    width: 70%;
+    margin: auto;
+    margin-top: 20%;
+}
+
+.panel-result {
+    font-size: 16px;
+    text-align: center;
+}
+
+.panel-result .panel-body {
+    background-color: #99d19e;
+    color: #35683a;
+}
+
+.span-room {
+    margin-left: 3px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.share-message p{
+    margin-top: 8px;
+}
+
+.checkbox-share {
+    height: 25px;
+    width: 25px;
+}
+
 @media (max-width: 768px) {
     .main-home  .button-place .btn{
         width: 100%;
@@ -105,6 +141,10 @@
 
     .modal-members {
         width: 95%;
+    }
+
+    .p-result {
+        text-align: center;
     }
 
     .list-of-members{
@@ -121,5 +161,13 @@
 
     #myModal .modal-footer {
         margin-top: -20px;
+    }
+
+    .share-message p{
+        margin-top: 0px;
+    }
+
+    .div-checkbox-share {
+        margin-top: 10px;
     }
 }

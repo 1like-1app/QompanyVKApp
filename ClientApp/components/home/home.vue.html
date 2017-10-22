@@ -8,7 +8,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close right-close" type="button" data-dismiss="modal">×</button>
-                        <h4 class="modal-title">Бронирование переговорной</h4>
+                        <h4 class="modal-title">Бронирование комнаты</h4>
                     </div>
                     <div class="modal-body">
                         <form role="form" method="post" name="booking" v-on:submit.prevent="onSubmit">
@@ -89,7 +89,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="booking-subm"></label>
-                                <input type="submit" name="booking-subm" class="form-control btn btn-success booking-submit" value="Забронировать">
+                                <input type="submit" name="booking-subm" class="form-control btn btn-success booking-submit" data-dismiss="modal" data-toggle="modal"
+                                    data-target="#modalResult" value="Забронировать">
                             </div>
                         </form>
                     </div>
@@ -108,7 +109,7 @@
                         <button class="close right-close" type="button" data-dismiss="modal">×</button>
                         <h4 class="modal-title">Выбор комнаты</h4>
                     </div>
-                    <div class="modal-body">Кажется, вам не понравилась предложенная переговорная!</div>
+                    <div class="modal-body">Кажется, вам не понравилась предложенная комната!</div>
                     <div class="modal-footer">
                         <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
                     </div>
@@ -145,6 +146,37 @@
                             <div class="form-group">
                                 <label for="adding-end"></label>
                                 <input type="submit" name="adding-end" class="form-control btn btn-success adding-submit" data-dismiss="modal" value="ОК">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modalResult" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content modal-result">
+                    <div class="modal-body">
+                        <form role="form" method="post" name="adding-new-members">
+                            <div class="form-group">
+                                <div class="panel panel-success panel-result">
+                                    <div class="panel-heading">Добавлено</div>
+                                    <div class="panel-body">
+                                        Ваша комната:
+                                        <span class="span-room">773/a</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group share-message">
+                                <div class=" col-md-9 col-sm-9 col-xs-9">
+                                    <p>Отправить уведомление участникам?</p>
+                                </div>
+                                <div class="col-md-3 col-sm-3 cols-xs-2">
+                                    <input class="checkbox-share" type="checkbox" name="share-checkbox" id="share-checkbox">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="adding-end"></label>
+                                <input type="submit" name="adding-end" class="form-control btn btn-success share-submit" data-dismiss="modal" value="ОК">
                             </div>
                         </form>
                     </div>

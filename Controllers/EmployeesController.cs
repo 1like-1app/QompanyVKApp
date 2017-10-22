@@ -33,10 +33,10 @@ namespace QompanyVKApp.Controllers
         }
 
         [HttpGet("[action]/{vkId}")]
-        public IEnumerable<Employee> GetEmployeesByGroupId([FromRoute] string vkId)
+        public IEnumerable<Employee> GetEmployeesByGroupId([FromRoute] string vkId="")
         {
             var vk = new VkApi();
-                var accessToken = _context.Groups.First(g => g.VKId == vkId).AccessToken;
+                var accessToken = _context.Groups.FirstOrDefault(g => g.VKId == vkId).AccessToken;
                 if (String.IsNullOrEmpty(accessToken))
                     return null;
             vk.Authorize(new ApiAuthParams

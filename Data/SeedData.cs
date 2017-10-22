@@ -19,7 +19,14 @@ namespace QompanyVKApp.Data
                 {
                     return;   // DB has been seeded
                 }
-                var room = new MeetingRoom() { Name = "Place where people talk about tfs", Floor = 2, Capacity = 5 };
+                var group = new Group
+                {
+                    AccessToken =
+                        "40099039dc84bbba636fff7051de15181a2da99a439ae66557e5646a64f36d75faebb023eb4cc7e2d86f6",
+                    VKId = "155492790"
+                };
+
+                var room = new MeetingRoom() { Name = "Place where people talk about tfs", Floor = 2, Capacity = 5,  Group = group};
                 
                 var meetings = new List<Meeting>()
                     {
@@ -28,7 +35,8 @@ namespace QompanyVKApp.Data
                             Theme = "Talk about why Git is better than TFVS",
                             StartTime = DateTime.Now,
                             EndTime = DateTime.Now + TimeSpan.FromHours(1),
-                            MeetingRoom = room
+                            MeetingRoom = room,
+                            Group = group
                         }
                     };
 
@@ -36,13 +44,15 @@ namespace QompanyVKApp.Data
                 {
                     new Employee
                     {
-                        FirstName = "Segey",
-                        LastName = "Polezhaev"
+                        FirstName = "Sergey",
+                        LastName = "Polezhaev",
+                        Group = group
                     },
                     new Employee
                     {
                         FirstName = "Yury",
-                        LastName = "Belousov"
+                        LastName = "Belousov",
+                        Group = group
                     }
                 };
                 meetings[0].EmployeeMeetings = new List<EmployeeMeeting>()

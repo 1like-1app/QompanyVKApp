@@ -2,8 +2,10 @@
 
 export class Employee {
     id: number;
-    vKId: string;
+    vkId: string;
+    photo: string;
     firstName: string;
     lastName: string;
     employeeMeetings: Meeting[];
+    meetings: Meeting[];
 }

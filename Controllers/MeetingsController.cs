@@ -88,10 +88,27 @@ namespace QompanyVKApp.Controllers
             return NoContent();
         }
 
+        public class AuthorRequest
+
+        {
+
+            public Meeting meeting { get; set; }
+
+            public string groupId { get; set; }
+
+            public bool notifyEmployees { get; set; }
+
+
+        }
+
         // POST: api/Meetings
         [HttpPost]
-        public async Task<IActionResult> PostMeeting([FromBody] Meeting meeting, string groupId, bool notifyEmployees)
+        public async Task<IActionResult> PostMeeting(AuthorRequest form)
         {
+            var meeting = form.meeting;
+            var groupId = form.groupId;
+            var notifyEmployees = form.notifyEmployees;
+            //[FromBody] Meeting meeting, string groupId, bool notifyEmployees
             meeting.Group = _context.Groups.First(g => g.VKId == groupId);
 
             if (notifyEmployees)

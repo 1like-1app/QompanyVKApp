@@ -1,7 +1,7 @@
 <template>
     <div class="main-home">
         <div class="button-place">
-            <button class="btn btn-info btn-lg button-book" type="button" data-toggle="modal" data-target="#myModal">Забронировать</button>
+            <button class="btn btn-info btn-lg button-book" type="button" data-toggle="modal" v-on:click="getEmployeesData" data-target="#myModal">Забронировать</button>
         </div>
         <div id="myModal" class="modal fade">
             <div class="modal-dialog">

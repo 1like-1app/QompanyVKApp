@@ -10,6 +10,10 @@ declare var VK: any;
 
 @Component
 export default class BookingForm extends Vue {
+    /**
+     *
+     */
+    
     key: string = "2ac16aae8e4c27d2a2dcc77d95a5c1e13226f48f5a6ad3de7eca8f261b9a45688ab6d1b91bd3259cfb79d";
     date: Date = new Date();
     meeting: Meeting = new Meeting()
@@ -22,9 +26,9 @@ export default class BookingForm extends Vue {
     rooms: MeetingRoom[] = [];
     duration: Date[] = [new Date((new Date()).setHours((new Date).getHours() + 2)), new Date((new Date()).setHours((new Date).getHours() + 3))];
 
-
     @Watch('date', { immediate: true, deep: true })
     dateOnPropertyChanged(value: Date, oldValue: Date) {
+        
         console.log(JSON.stringify(value));
         this.getRoomsForMeeting();
     }
@@ -50,6 +54,7 @@ export default class BookingForm extends Vue {
     }
 
     checkboxToggle(id: number) {
+   
         let b = this.meeting.employeeMeetings.filter(e => e.id == id);
         if (b.length) {
             this.meeting.employeeMeetings = this.meeting.employeeMeetings.filter(e => e.id != b[0].id);
@@ -100,15 +105,26 @@ export default class BookingForm extends Vue {
             this.checkedEmployees = this.checkedEmployees.filter(e => e != id);
         }
     }
+    getEmployeesData()
+    {
+        fetch('api/Employees/GetEmployeesBygroupid/' + this.currentGroup)
+        .then(response => response.json() as Promise<Employee[]>)
+        .then(data => {
+            this.employees = data;
+        });
+
+        this.getRoomsForMeeting();        
+    }
     onSubmit(submitEvent: any) {
+     
         this.meeting.startTime = this.duration[0];
         this.meeting.endTime = this.duration[1];
         this.meeting.meetingRoom = this.rooms.filter(r => r.name === this.selected)[0];
         if (submitEvent) submitEvent.preventDefault();
-
+        var data = { meeting: this.meeting, groupId: this.currentGroup, notifyEmployees: true }
         fetch('api/meetings', {
             method: 'post',
-            body: JSON.stringify({ meeting: this.meeting, groupId: this.currentGroup, notifyEmployees: true }),
+            body: JSON.stringify(data),
             headers: new Headers({
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -119,6 +135,7 @@ export default class BookingForm extends Vue {
 
         // 
         if (!this.init) {
+            
             this.init = true;
             var self = this;
             VK.init(function () {
@@ -149,7 +166,7 @@ export default class BookingForm extends Vue {
                     });
                     VK.callMethod("showGroupSettingsBox", 4096);
                 }
-                VK.callMethod("showAllMessagesFromCommunityBox");
+                VK.callMethod("showAllowMessagesFromCommunityBox");
 
             });
         }
@@ -172,10 +189,9 @@ export default class BookingForm extends Vue {
                     this.meetings[i].title = this.meetings[i].theme;
                 }
             });
-        fetch('api/Employees/GetEmployeesByGroupId/' + this.currentGroup)
+        fetch('api/Employees/GetEmployeesBygroupid/' + this.currentGroup)
             .then(response => response.json() as Promise<Employee[]>)
             .then(data => {
-                alert(JSON.stringify(data));
                 this.employees = data;
             });
     }

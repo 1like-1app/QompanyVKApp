@@ -20,38 +20,21 @@
                                 <div class="form-group col-md-4 col-sm-4 col-xs-6">
                                     <label for="ivent-date">Дата:</label>
                                     <div class="dateblock">
-                                            <el-date-picker v-model="value1" type="date" placeholder="Выберите дату">
-                                            </el-date-picker>
-                                          </div>
-                                          <!-- <div class="block"> -->
-                                    <!-- <input type="date" class="form-control ivent-date-field" id="ivent-date" name="ivent-date"> -->
-                                <!-- </div> -->
-                            </div>
+                                        <el-date-picker type="date" v-model="date" placeholder="Выберите дату" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
-                                <!-- <div class="form-group col-md-3 col-sm-3 col-xs-5">
-                                    <label for="ivent-time1">
-                                        <b>С:</b>
-                                    </label>
-                                    <input type="time" class="form-control ivent-time1-field" id="ivent-time1" name="ivent-time1">
-                                </div>
                                 <div class="form-group col-md-3 col-sm-3 col-xs-5">
-                                    <label for="ivent-time2">
-                                        <b>ДО:</b>
+                                    <label for="ivent-time1">
+                                        <b>Время</b>
                                     </label>
-                                    <input type="time" class="form-control ivent-time2-field" id="ivent-time2" name="ivent-time2">
-                                </div> -->
-                                <!-- <script src="//unpkg.com/vue/dist/vue.js"></script>
-                                <script src="//unpkg.com/element-ui@1.4.7/lib/index.js"></script> -->
+                                    <div id="doubleclock">
+                                        <el-time-picker is-range v-model="duration" placeholder="Укажите время" />
+                                    </div>
                                 </div>
-                                <div id="doubleclock">
-                                <template>
-                                  <el-time-picker is-range v-model="value3" lang="ru" placeholder="Укажите время">
-                                  </el-time-picker>
-                                </template>
-
-
                             </div>
+
                             <div class="row">
                                 <div class="form-group col-md-2 col-sm-2 col-xs-12">
                                     <label for="ivent-members">Участники:</label>
@@ -113,7 +96,7 @@
                             <div class="form-group">
                                 <label for="booking-subm"></label>
                                 <input type="submit" name="booking-subm" class="form-control btn btn-success booking-submit" data-dismiss="modal" data-toggle="modal"
-                                    data-target="#modalResult" value="Забронировать">
+                                    data-target="#modalResult" value="Забронировать" v-on:click="onSubmit($event)">
                             </div>
                         </form>
                     </div>
@@ -218,6 +201,5 @@
     </div>
 </template>
 
-<!-- <script src="./home.ts"> -->
 <style src="./home.css" />
 <script src="./home.ts"></script>

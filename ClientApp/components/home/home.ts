@@ -3,54 +3,34 @@ import { Meeting } from "../../models/Meeting"
 import { Component, Watch } from 'vue-property-decorator';
 import { Employee } from '../../models/Employee';
 import { MeetingRoom } from '../../models/MeetingRoom';
-import ElementUI from 'element-ui'
-import locale from 'element-ui/lib/locale/lang/ru-RU'
-
-Vue.use(ElementUI, { locale })
-new Vue({
-    el: '#doubleclock'
-})
-new Vue({
-    el: "#block"
-})
-// var m = {
-//     data() {
-//       return {
-//         value3: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
-//       };
-//     }
-// }
-// var c = new Vue.extend(m);
-// new Ctor().$mount('#doubleclock')
 
 @Component
 export default class BookingForm extends Vue {
-    date: string = new Date().toISOString().split('T')[0];
+    date: Date = new Date();
     meeting: Meeting = new Meeting()
     meetings: Meeting[] = [];
     employees: Employee[] = [];
     checkedEmployees = [];
     selected: string = '';
     rooms: MeetingRoom[] = [];
+    duration: Date[] = [new Date((new Date()).setHours((new Date).getHours() + 2)), new Date((new Date()).setHours((new Date).getHours() + 3))];
 
 
     @Watch('date', { immediate: true, deep: true })
-    dateOnPropertyChanged(value: string, oldValue: string) {
+    dateOnPropertyChanged(value: Date, oldValue: Date) {
+        console.log(JSON.stringify(value));        
         this.getRoomsForMeeting();
     }
 
-    @Watch('meeting', { immediate: true, deep: true })
-    meetingOnPropertyChanged(value: Meeting, oldValue: Meeting) {
-        if (typeof value.startTime === "string" && typeof value.endTime === "string") {
-            this.getRoomsForMeeting();
-        }
+    @Watch('duration', { immediate: true, deep: true })
+    meetingOnPropertyChanged(value: Date[], oldValue: Date[]) {
+        console.log(JSON.stringify(value));
+        this.getRoomsForMeeting();
     }
 
     getRoomsForMeeting() {
-        let startTime = new Date(this.date.toString() + 'T' + this.meeting.startTime);
-        let endTime = new Date(this.date.toString() + 'T' + this.meeting.endTime);
-        let query = 'api/MeetingRooms/GetSatisfyingRooms/' + startTime.toISOString() + "/" + endTime.toISOString();
-        console.log(query);
+        let query = 'api/MeetingRooms/GetSatisfyingRooms/' + this.duration[0].toISOString() + "/" + this.duration[1].toISOString();
+        //console.log(query);
         fetch(query)
             .then(response => response.json() as Promise<MeetingRoom[]>)
             .then(data => {
@@ -83,8 +63,8 @@ export default class BookingForm extends Vue {
     }
 
     onSubmit(submitEvent: any) {
-        this.meeting.startTime = new Date(this.date.toString() + 'T' + this.meeting.startTime.toString());
-        this.meeting.endTime = new Date(this.date.toString() + 'T' + this.meeting.endTime.toString());
+        this.meeting.startTime = this.duration[0];
+        this.meeting.endTime = this.duration[1];
         this.meeting.meetingRoom = this.rooms.filter(r=> r.name === this.selected )[0];
         if (submitEvent) submitEvent.preventDefault();
 
@@ -116,12 +96,3 @@ export default class BookingForm extends Vue {
     }
 
 }
-var Main = {
-    data() {
-      return {
-        value3: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
-      };
-    }
-  }
-var Ctor = Vue.extend(Main)
-new Ctor().$mount('#doubleclock')
